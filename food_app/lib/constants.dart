@@ -7,4 +7,4 @@ const bodyTextColor = Color(0xFF868686);
 const inputColor = Color(0xFFfbfbfb);
 const bgColor = Colors.white;
 
-const double defPad = 16.0;
+const double defaultPadding = 16.0;
