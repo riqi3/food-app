@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:food_app/constants.dart';
 import 'package:food_app/screens/home/data.dart';
 
+import 'components/imageCarousel.dart';
+import 'components/restuarantInfocardMedium.dart';
+import 'components/sectionTitle.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -15,7 +19,7 @@ class HomeScreen extends StatelessWidget {
             SliverAppBar(
               floating: true,
               pinned: false,
-              backgroundColor: Colors.transparent,
+              backgroundColor: Colors.white,
               elevation: 0,
               centerTitle: true,
               title: Column(
@@ -43,80 +47,88 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SliverToBoxAdapter(
-              child: imageCarousel(),
-            ),
+            
           ];
-        },
-        body: Container(),
-      ),
-    );
-  }
-}
-
-class imageCarousel extends StatefulWidget {
-  const imageCarousel({
-    super.key,
-  });
-
-  @override
-  State<imageCarousel> createState() => _imageCarouselState();
-}
-
-class _imageCarouselState extends State<imageCarousel> {
-  int _currentPosition = 0;
-  @override
-  Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1.81,
-      child: Stack(
-        children: [
-          PageView.builder(
-            itemCount: largeImages.length,
-            onPageChanged:(value) {
-              setState(() {
-                _currentPosition = value;
-              });
-            },
-            itemBuilder: (context, index) => Image.asset(
-              largeImages[index],
+        }, body: CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+              sliver: SliverToBoxAdapter(
+                child: imageCarousel(),
+              ),
             ),
-          ),
-          Positioned(
-            bottom: defaultPadding,
-            right: defaultPadding,
-            child: Row(
-                children: List.generate(
-                    largeImages.length,
+            SliverPadding(
+              padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+              sliver: SliverToBoxAdapter(
+                child: SectionTitle(
+                  title: 'Featured Partners',
+                  press: () {},
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: List.generate(
+                    mediumCardData.length,
                     (index) => Padding(
-                          padding: const EdgeInsets.only(
-                              left: defaultPadding / 4),
-                          child: indicatorDots(
-                            isActive: index == _currentPosition,
-                          ),
-                        ))),
-          ),
-        ],
+                      padding: const EdgeInsets.only(left: defaultPadding),
+                      child: RestaurantInfocardMedium(
+                        title: mediumCardData[index]['name'],
+                        location: mediumCardData[index]['location'],
+                        image: mediumCardData[index]['image'],
+                        deliverTime: mediumCardData[index]['deliverTime'],
+                        rating: mediumCardData[index]['rating'],
+                        press: () {},
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.all(defaultPadding),
+              sliver: SliverToBoxAdapter(
+                child: ClipRRect(
+                    borderRadius:
+                        BorderRadius.all(Radius.circular(defaultBorderRadius)),
+                    child: Image.asset('assets/images/food-app-banner2.jpg')),
+              ),
+            ),
+            SliverPadding(
+              padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+              sliver: SliverToBoxAdapter(
+                child: SectionTitle(
+                  title: 'Best Picks',
+                  press: () {},
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: List.generate(
+                    mediumCardData.length,
+                    (index) => Padding(
+                      padding: const EdgeInsets.only(left: defaultPadding),
+                      child: RestaurantInfocardMedium(
+                        title: mediumCardData[index]['name'],
+                        location: mediumCardData[index]['location'],
+                        image: mediumCardData[index]['image'],
+                        deliverTime: mediumCardData[index]['deliverTime'],
+                        rating: mediumCardData[index]['rating'],
+                        press: () {},
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-    );
-  }
-}
-
-class indicatorDots extends StatelessWidget {
-  const indicatorDots({
-    Key? key,
-    required this.isActive,
-  }) : super(key: key);
-  final bool isActive;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 4,
-      width: 8,
-      decoration: BoxDecoration(
-          color: isActive ? Colors.white : Colors.white54,
-          borderRadius: BorderRadius.all(Radius.circular(12))),
     );
   }
 }
