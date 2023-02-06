@@ -62,10 +62,13 @@ flutter:
   assets:
     - assets/images/manginasal-large1.jpg
     - assets/images/jollibee-large2.png
+    - assets/images/burgerking-large3.png
 
     - assets/images/manginasal-medium1.jpg
     - assets/images/jollibee-medium2.png
+    - assets/images/burgerking-medium3.png
 
+    - assets/images/food-app-banner1.jpg
     - assets/images/food-app-banner2.jpg
     # - images/a_dot_ham.jpeg
 

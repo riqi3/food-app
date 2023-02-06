@@ -22,7 +22,7 @@ final VoidCallback press;
         TextButton(
             onPressed: press,
             style: TextButton.styleFrom(primary: activeColor),
-            child: Text('Sell All'))
+            child: Text('See All'))
       ],
     );
   }

@@ -100,6 +100,45 @@ class HomeScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: defaultPadding),
               sliver: SliverToBoxAdapter(
                 child: SectionTitle(
+                  title: 'Trending Finds',
+                  press: () {},
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: List.generate(
+                    mediumCardData2.length,
+                    (index) => Padding(
+                      padding: const EdgeInsets.only(left: defaultPadding),
+                      child: RestaurantInfocardMedium(
+                        title: mediumCardData2[index]['name'],
+                        location: mediumCardData2[index]['location'],
+                        image: mediumCardData2[index]['image'],
+                        deliverTime: mediumCardData2[index]['deliverTime'],
+                        rating: mediumCardData2[index]['rating'],
+                        press: () {},
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.all(defaultPadding),
+              sliver: SliverToBoxAdapter(
+                child: ClipRRect(
+                    borderRadius:
+                        BorderRadius.all(Radius.circular(defaultBorderRadius)),
+                    child: Image.asset('assets/images/food-app-banner1.jpg')),
+              ),
+            ),
+            SliverPadding(
+              padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+              sliver: SliverToBoxAdapter(
+                child: SectionTitle(
                   title: 'Best Picks',
                   press: () {},
                 ),
@@ -110,15 +149,15 @@ class HomeScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: List.generate(
-                    mediumCardData.length,
+                    mediumCardData3.length,
                     (index) => Padding(
                       padding: const EdgeInsets.only(left: defaultPadding),
                       child: RestaurantInfocardMedium(
-                        title: mediumCardData[index]['name'],
-                        location: mediumCardData[index]['location'],
-                        image: mediumCardData[index]['image'],
-                        deliverTime: mediumCardData[index]['deliverTime'],
-                        rating: mediumCardData[index]['rating'],
+                        title: mediumCardData3[index]['name'],
+                        location: mediumCardData3[index]['location'],
+                        image: mediumCardData3[index]['image'],
+                        deliverTime: mediumCardData3[index]['deliverTime'],
+                        rating: mediumCardData3[index]['rating'],
                         press: () {},
                       ),
                     ),
